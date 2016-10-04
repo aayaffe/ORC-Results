@@ -5,7 +5,7 @@ import pandas as pd
 import time
 from oauth2client.service_account import ServiceAccountCredentials
 
-columns = [('Sail nr.', 1, 'SAILNUMB', 'A'),('Class', 2, '', 'B'), ('Name', 3, 'NAME', 'C'),
+columns = [('Sail nr.', 1, 'SAILNUMB', 'A'),('Name', 2, 'NAME', 'B'),('Class', 3, '', 'C'),
            ('Owner', 5, 'OWNER', 'D'), ('Type', 6, 'TYPE', 'E'),
            ('Year', 7, 'YEAR', 'F'), ('LOA', 8, 'LOA', 'G'),
            ('CDL', 9, 'CDL', 'H'), ('TxtInsh.', 10, 'TMF', 'I'),
@@ -38,7 +38,7 @@ def addYachts(wks, data):
 
 def add_class(wks, cdl1, cdl2):
     values_list = wks.col_values(8)[1:]
-    cell_list = wks.range('B2:B' + str(len(data.get('TMF-OF')) + 1))
+    cell_list = wks.range('C2:C' + str(len(data.get('TMF-OF')) + 1))
     for cell, val in zip(cell_list, values_list):
         if (float(val) >= cdl2):
             cell.value = "ORC1"
