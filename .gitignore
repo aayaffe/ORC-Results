@@ -1,7 +1,8 @@
 #Project specific
 #Key files
 *.json
-
+#*Do* keep npm json files
+!package.json
 
 
 

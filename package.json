@@ -1,0 +1,22 @@
+{
+  "name": "orc_results",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aayaffe/ORC-Results.git"
+  },
+  "author": "Amit Yaffe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aayaffe/ORC-Results/issues"
+  },
+  "homepage": "https://github.com/aayaffe/ORC-Results#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
