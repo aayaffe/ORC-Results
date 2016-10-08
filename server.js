@@ -4,14 +4,22 @@ var url = require("url")
 
 app.get('/*', function (req, res) {
   
-  var u = url.parse(req.url.toString())
-  var path = decodeURIComponent(u.path).replace('/','')
-  console.log(path.toString())
-  var d = Date.parse(path)
-  if (isNaN(d)) res.end('Not a date!')
-  else res.end (d.toDateString())
+  var h = req.headers;
+  if (h){
+    var j = {}
+    j["ipaddress"] = req.get("x-forwarded-for");
+    
+    var regExp = /\w\w-\w\w/g;
+    var matches = regExp.exec(req.get("accept-language"));
+    j["language"] = matches[0];
+    regExp = /\(([^)]+)\)/;
+    matches = regExp.exec(req.get("user-agent"));
+    j["software"] = matches[1];
+    var json =JSON.stringify(j)
+    res.end(json)
+  }
 });
 
 app.listen(process.env.PORT, function () {
-  console.log('Example app listening on port '+process.env.PORT+'!');
+  console.log('Request Header Parser Microservice listening on port '+process.env.PORT+'!');
 });
