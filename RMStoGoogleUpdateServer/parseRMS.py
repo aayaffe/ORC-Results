@@ -10,7 +10,7 @@ columns = [('Sail nr.', 1, 'SAILNUMB', 'A'),('Name', 2, 'NAME', 'B'),('Class', 3
            ('Year', 7, 'YEAR', 'F'), ('LOA', 8, 'LOA', 'G'),
            ('CDL', 9, 'CDL', 'H'), ('TxtInsh.', 10, 'TMF', 'I'),
            ('TxtOffsh.', 11, 'TMF-OF', 'J'),('Update.', 12, 'DD_MM_yyYY HH:MM:SS', 'K')]
-
+class_split = [8.0,9.0]
 def add_date(wks):
     wks.update_cell(1, len(columns)+3, "Updated:")
     wks.update_cell(1, len(columns) + 4, time.strftime("%d/%m/%y, %H:%M:%S"))
@@ -55,11 +55,18 @@ data = pd.read_fwf("http://data.orc.org/public/WPub.dll?action=DownRMS&CountryId
 
 scope = ['https://spreadsheets.google.com/feeds']
 credentials = ServiceAccountCredentials.from_json_keyfile_name('ORC-Results-6fc8dcf259fe.json', scope)
+print("Openning google sheet.")
 gc = gspread.authorize(credentials)
 
 wks = gc.open_by_url(
     'https://docs.google.com/spreadsheets/d/1S0zaKu3JjvFwz585dRicAc9pjVrE7ghI2wjSeAdrjSs/edit?usp=sharing').sheet1
+print("Google sheet opened.")
 addHeader(wks)
+print("Added headers.")
 addYachts(wks, data)
-add_class(wks, 8.0, 9.0)
+print("Added Yachts.")
+add_class(wks, class_split[0], class_split[1])
+print("Added classes with split "+str(class_split[0])+" and "+str(class_split[1])+ ".")
 add_date(wks)
+print("Added update date.")
+print("Done!\n")
