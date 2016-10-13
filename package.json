@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/aayaffe/ORC-Results#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-logger": "0.0.3",
+    "morgan": "^1.7.0",
+    "python-shell": "^0.4.0"
   }
 }
